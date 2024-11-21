@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\{MedallaController, PaisController, EventoDeportivoController, EquipoDeportistaController, 
+use App\Http\Controllers\{MedallasController, PaisController, EventoDeportivoController, EquipoDeportistaController, 
     EquipoController, DeportistaController, DeporteController};
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -15,12 +15,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 /*Ruta de direccion para el controlador de la tabla Medallas*/
 
 Route::get('/medallas', [MedallasController::class, 'index']);
+Route::post('/medallas', [MedallaController::class, 'store']);
 
 
 
 /*Ruta de direccion para el controlador de la tabla Pais*/
 
 Route::get('/pais', [PaisController::class, 'index']);
+Route::post('/pais', [PaisController::class, 'store']);
 
 
 

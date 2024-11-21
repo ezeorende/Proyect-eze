@@ -13,6 +13,11 @@ class Medalla extends Model
     // Define el nombre de la tabla si es necesario 
     protected $table = 'medallas';
 
+    protected $fillable = [
+        'evento_id',
+        'tipo',
+    ];
+
 }
 
 
