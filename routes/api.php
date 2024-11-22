@@ -15,24 +15,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 /*Ruta de direccion para el controlador de la tabla Medallas*/
 
 Route::get('/medallas', [MedallasController::class, 'index']);
-Route::post('/medallas', [MedallaController::class, 'store']);
+Route::post('/medallas', [MedallasController::class, 'store']);
+Route::get('/medallas/{id}', [MedallasController::class, 'show']);
 
+Route::delete('/medallas/{id}', [MedallasController::class, 'destroy']);
 
 
 /*Ruta de direccion para el controlador de la tabla Pais*/
 
 Route::get('/pais', [PaisController::class, 'index']);
 Route::post('/pais', [PaisController::class, 'store']);
-
+Route::get('/pais/{id}', [PaisController::class, 'show']);
+Route::put('/pais/{id}', [PaisController::class, 'update']);
+Route::delete('/pais/{id}', [PaisController::class, 'destroy']);
 
 
 
 
 /*Ruta de direccion para el controlador de la tabla Eventos Deportivos*/
 
-Route::get('/eventosDeportivos', [PaisController::class, 'index']);
-
-
+Route::get('/evento_deportivos', [EventoDeportivoController::class, 'index']);
+// Mensaje store:   Route::post('/evento_deportivos', [EventoDeportivoController::class, 'store']);
+Route::get('/evento_deportivos/{id}', [EventoDeportivoController::class, 'show']);
 
 /*Ruta de direccion para el controlador de la tabla equipo_deportista*/
 

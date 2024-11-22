@@ -10,5 +10,5 @@ class Evento_deportivo extends Model
     use HasFactory;
     
     // Define el nombre de la tabla si es necesario 
-    protected $table = 'eventosDeportivos';
+    protected $table = 'evento_deportivos';
 }
