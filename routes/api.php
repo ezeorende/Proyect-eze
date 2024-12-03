@@ -14,10 +14,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 /*Ruta de direccion para el controlador de la tabla Medallas*/
 
+/*Ruta de direccion para el controlador de la tabla Medallas*/
+
 Route::get('/medallas', [MedallasController::class, 'index']);
 Route::post('/medallas', [MedallasController::class, 'store']);
 Route::get('/medallas/{id}', [MedallasController::class, 'show']);
-
+Route::put('/medallas/{id}', [MedallasController::class, 'update']);
 Route::delete('/medallas/{id}', [MedallasController::class, 'destroy']);
 
 
@@ -35,8 +37,12 @@ Route::delete('/pais/{id}', [PaisController::class, 'destroy']);
 /*Ruta de direccion para el controlador de la tabla Eventos Deportivos*/
 
 Route::get('/evento_deportivos', [EventoDeportivoController::class, 'index']);
-// Mensaje store:   Route::post('/evento_deportivos', [EventoDeportivoController::class, 'store']);
+Route::post('/evento_deportivos', [EventoDeportivoController::class, 'store']);
 Route::get('/evento_deportivos/{id}', [EventoDeportivoController::class, 'show']);
+Route::put('/evento_deportivos/{id}', [EventoDeportivoController::class, 'update']);
+Route::delete('/evento_deportivos/{id}', [EventoDeportivoController::class, 'destroy']);
+
+
 
 /*Ruta de direccion para el controlador de la tabla equipo_deportista*/
 
@@ -47,15 +53,25 @@ Route::get('/equipo_deportista', [EquipoDeportistaController::class, 'index']);
 /*Ruta de direccion para el controlador de la tabla equipo*/
 
 Route::get('/equipos', [EquipoController::class, 'index']);
-
+Route::post('/equipos', [EquipoController::class, 'store']);
+Route::get('/equipos/{id}', [EquipoController::class, 'show']);
+Route::put('/equipos/{id}', [EquipoController::class, 'update']);
+Route::delete('/equipos/{id}', [EquipoController::class, 'destroy']);
 
 
 /*Ruta de direccion para el controlador de la tabla Deportistas*/
 
 Route::get('/deportistas', [DeportistaController::class, 'index']);
-
+Route::post('/deportistas', [DeportistaController::class, 'store']);
+Route::get('/deportistas/{id}', [DeportistaController::class, 'show']);
+Route::put('/deportistas/{id}', [DeportistaController::class, 'update']);
+Route::delete('/deportistas/{id}', [DeportistaController::class, 'destroy']);
 
 
 /*Ruta de direccion para el controlador de la tabla Deportes*/
 
-Route::get('/deportes', [DeportistaController::class, 'index']);
+Route::get('/deportes',[DeporteController::class, 'index']);
+Route::post('/deportes', [DeporteController::class, 'store']);
+Route::get('/deportes/{id}',[DeporteController::class, 'show']);
+Route::put('/deportes/{id}',[DeporteController::class, 'update']);
+Route::delete('/deportes/{id}',[DeporteController::class, 'destroy']);

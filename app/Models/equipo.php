@@ -11,4 +11,10 @@ class equipo extends Model
 
     // Define el nombre de la tabla si es necesario 
     protected $table = 'equipos';
+
+    protected $fillable = [
+        'pais',
+        'evento_deportivo',
+        'medalla',
+    ];
 }

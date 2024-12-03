@@ -45,7 +45,9 @@ class PaisController extends Controller
     }
 
 
-    public function update(Request $request, string $id) {
+    public function update(Request $request, $id)
+    {
+        // Valida los datos de entrada que recibe
         $validated = $request->validate([
             'nombre' => 'string|max:255',
             'medallas_oro' => 'integer|min:0',
@@ -53,22 +55,43 @@ class PaisController extends Controller
             'medallas_bronce' => 'integer|min:0',
         ]);
 
-        $pais = Pais::findOrFail($id);
-
+        //Realiza la suimatoria de las medallas totales con las cuales cuenta el pais
         $total_medallas = $validated['medallas_oro']
             + $validated['medallas_plata']
             + $validated['medallas_bronce'];
 
+        //Actualiza el total de las medallas
         $validated['total_medallas'] = $total_medallas;
 
+        // Buscar el pais por su ID
+        $pais = Pais::find($id);
+
+        //Envia un mensaje de error si el equipo solicitado no existe
+        if (!$pais) {
+            return response()->json([
+                'message' => 'Pais no encontrado.'
+            ], 404);
+        }
+            
+        // Actualizar solo los campos enviados en la solicitud
         $pais->update($validated);
 
-        return response()->json($pais->fresh());
+        // Retornar la respuesta el pais actualizado
+        return response()->json([
+            'message' => 'Pais actualizado exitosamente.',
+            'data'    => $pais
+        ], 200);
     }
 
 
+
+    
+
     public function destroy(string $id) {
+        //Busca el pais por su id
         $pais = Pais::findOrFail($id);
+
+        //Retora una respouesta Json y borra el pais
         return response()->json($pais->delete());
     }
 }

@@ -1,7 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
+
 use App\Models\equipo_deportista;
+use Illuminate\Http\Request;
 
 class EquipoDeportistaController extends Controller
 {
@@ -11,11 +12,6 @@ class EquipoDeportistaController extends Controller
         return response()->json(equipo_deportista::all());
     }
 
-    
-    public function create()
-    {
-        //
-    }
 
     
     public function store(Request $request)
@@ -30,10 +26,6 @@ class EquipoDeportistaController extends Controller
     }
 
     
-    public function edit(string $id)
-    {
-        //
-    }
 
     
     public function update(Request $request, string $id)

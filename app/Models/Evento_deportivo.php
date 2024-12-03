@@ -11,4 +11,11 @@ class Evento_deportivo extends Model
     
     // Define el nombre de la tabla si es necesario 
     protected $table = 'evento_deportivos';
+    
+    //Define que campos de la tabla pueden ser editados 
+    protected $fillable = [
+        'id_deporte',
+        'nombre',
+    ];
+
 }
