@@ -8,6 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Evento_deportivo extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    
+    // Define el nombre de la tabla si es necesario 
+    protected $table = 'evento_deportivos';
+    
+    //Define que campos de la tabla pueden ser editados 
+    protected $fillable = [
+        'id_deporte',
+        'nombre',
+    ];
+=======
+>>>>>>> fccdec53222ba78b5ca5d28a0dd02285a44920d6
     protected $table ='evento_deportivos';
     protected $fillable = ['id_deporte', 'nombre'];
 
@@ -70,5 +84,9 @@ class Evento_deportivo extends Model
         }
         return false;
     }
+<<<<<<< HEAD
+=======
+>>>>>>> a898530e1214a575a74e276c26d474bcb9128567
+>>>>>>> fccdec53222ba78b5ca5d28a0dd02285a44920d6
 
 }
