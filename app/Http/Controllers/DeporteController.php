@@ -9,7 +9,7 @@ class DeporteController extends Controller
     
     public function index()
     {
-        return response()->json(Deporte::all());
+        return response()->json(deportes::all());
     }
 
     
