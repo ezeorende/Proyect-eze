@@ -11,7 +11,5 @@ class Deporte extends Model
     // Define el nombre de la tabla si es necesario 
     protected $table = 'deportes';
 
-    protected $fillable = [
-        'nombre',
-    ];
+
 }
