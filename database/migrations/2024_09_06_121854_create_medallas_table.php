@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('medallas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('evento_id')->references('id')->on('evento_deportivos');
+            $table->foreignId('id_evento')->references('id')->on('evento_deportivos');
             $table->enum('tipo', ['oro', 'plata', 'bronce']);
             $table->timestamps();
 
