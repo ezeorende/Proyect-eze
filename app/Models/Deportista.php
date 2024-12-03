@@ -9,11 +9,5 @@ class Deportista extends Model
 {
     use HasFactory;
     // Define el nombre de la tabla si es necesario 
-    protected $table = 'deportistas'; 
-
-    protected $fillable = [
-        'nombre',
-        'pais',
-        
-    ];
+    protected $table = 'deportistas';
 }
