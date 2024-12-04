@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\equipo;
+use App\Models\Equipo;
+use App\Models\Medalla;
 use Illuminate\Http\Request;
 
 class EquipoController extends Controller
@@ -9,22 +10,40 @@ class EquipoController extends Controller
     
     public function index()
     {
-        return response()->json(equipo::all());
+        return response()->json(Equipo::all());
     }
 
 
     public function store(Request $request)
     {
         // Validar los datos de entrada
+        /*
         $validated = $request->validate([
-            'pais' => 'required|integer|min:0',
-            'evento_deportivo' => 'required|integer|min:0',
-            'medalla' => 'required|integer|min:0',
+            'pais_id' => 'required|integer|exists:pais,id|min:0',
+            'evento_deportivo_id' => 'required|exists:evento_deportivos,id|integer|min:0',
+            'tipo_medalla' => 'required|integer|min:0|in:oro,plata,bronce',
+            'deportistas' => 'required|array',
+            'deportistas.*' => 'required|integer|exists:deportistas,id',
         ]);
+        */
+
+        $validated = $request->toArray(); 
+        
+        $medalla = Medalla::crearMedalla($validated['evento_deportivo_id'], $validated['tipo_medalla']);
+
 
         // Crear el registro en la base de datos
-        $equipo = equipo::create($validated);
+        $equipo = Equipo::create([
+            'pais' => $validated['pais_id'],
+            'evento_deportivo' => $validated['evento_deportivo_id'],
+            'medalla' => $medalla->id,
+        ]);
 
+
+        
+        $equipo->deportistas()->sync($validated['deportistas']);
+
+     
         // Retornar una respuesta JSON
         return response()->json([
             'message' => 'Registro creado exitosamente',
@@ -34,7 +53,7 @@ class EquipoController extends Controller
 
    
     public function show(Request $request, string $id) {
-        $equipo = equipo::findOrFail($id);
+        $equipo = Equipo::findOrFail($id);
         return response()->json($equipo);
     }
 
@@ -49,7 +68,7 @@ class EquipoController extends Controller
         ]);
 
         // Buscar la tabla por su ID
-        $equipo = equipo::find($id);
+        $equipo = Equipo::find($id);
 
         //Envia un mensaje de error si el equipo solicitado no existe
         if (!$equipo) {
@@ -72,7 +91,7 @@ class EquipoController extends Controller
     public function destroy(string $id)
     {
         //Busca el pais por su id
-        $equipo = equipo::findOrFail($id);
+        $equipo = Equipo::findOrFail($id);
 
         //Retora una respouesta Json y borra el pais
         return response()->json($equipo->delete());

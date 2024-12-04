@@ -9,12 +9,12 @@ class Medalla extends Model
 {
     use HasFactory;
     protected $table ='medallas';
-    protected $fillable = ['id_evento', 'tipo'];
+    protected $fillable = ['evento_id', 'tipo'];
 
         // Relación con el modelo EventoDeportivo
     public function eventoDeportivo()
     {
-        return $this->belongsTo(EventoDeportivo::class, 'id_evento');
+        return $this->belongsTo(EventoDeportivo::class, 'evento_id');
     }
 
      //Define que campos de la tabla pueden ser editados 
@@ -35,7 +35,7 @@ class Medalla extends Model
     public static function crearMedalla($id_evento, $tipo)
     {
         return self::create([
-            'id_evento' => $id_evento,
+            'evento_id' => $id_evento,
             'tipo' => $tipo,
         ]);
     }
@@ -66,5 +66,15 @@ class Medalla extends Model
             return true;
         }
         return false;
+    }
+
+
+
+    /*A partir de este punto empiezo a definir funciones utiles para las transacciones de controladores */
+    
+    
+    public function pais()
+    {
+        return $this->belongsTo(Pais::class);
     }
 }

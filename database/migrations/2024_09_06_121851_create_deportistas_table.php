@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('deportistas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->foreignId('pais')->references('id')->on('pais'); // Foreign key
+            $table->foreignId('pais')->references('id')->on('pais')->onDelete('cascade');  // Foreign key
             $table->timestamps();
 
 

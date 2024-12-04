@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pais')->references('id')->on('pais'); 
             $table->foreignId('evento_deportivo')->references('id')->on('evento_deportivos'); 
-            $table->foreignId('medalla')->references('id')->on('medallas'); 
+            $table->foreignId('medalla')->references('id')->on('medallas')->onDelete('cascade'); 
             $table->timestamps();
         });
     }

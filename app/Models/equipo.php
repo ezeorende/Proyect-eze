@@ -5,25 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class equipo extends Model
+class Equipo extends Model
 {
     use HasFactory;
     protected $table ='equipos';
-    protected $fillable = ['pais', 'evento_deportivo_id', 'medalla_id'];
+    protected $fillable = ['pais', 'evento_deportivo', 'medalla'];
 
       /** Relación con el modelo EventoDeportivo (Este método indica que el modelo actual
      * tiene una clave foránea que apunta a otro modelo,se utiliza para
      * establecer que el equipo está asociado a un evento deportivo y a una medalla específicos.)
      */
+
+     public function deportistas() 
+     {
+        return $this->belongsToMany(Deportista::class, 'equipo_deportistas', 'id_equipo', 'id_deportista');
+    }
+
      public function eventoDeportivo()
      {
-         return $this->belongsTo(EventoDeportivo::class, 'evento_deportivo_id');
+         return $this->belongsTo(EventoDeportivo::class, 'evento_deportivo');
      }
  
      // Relación con el modelo Medalla
      public function medalla()
      {
-         return $this->belongsTo(Medalla::class, 'medalla_id');
+         return $this->belongsTo(Medalla::class, 'medalla');
      }
 
        /**
@@ -49,8 +55,8 @@ class equipo extends Model
     {
         return self::create([
             'pais' => $pais,
-            'evento_deportivo_id' => $evento_deportivo_id,
-            'medalla_id' => $medalla_id,
+            'evento_deportivo' => $evento_deportivo_id,
+            'medalla' => $medalla_id,
         ]);
     }
 
