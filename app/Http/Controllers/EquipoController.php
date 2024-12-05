@@ -74,7 +74,7 @@ class EquipoController extends Controller
         //Busca el pais por su id
         $equipo = equipo::findOrFail($id);
 
-        //Retora una respouesta Json y borra el pais
+        //Retorna una respuesta Json y borra el pais
         return response()->json($equipo->delete());
     }
 }

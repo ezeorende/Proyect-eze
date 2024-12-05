@@ -11,16 +11,6 @@ class equipo extends Model
     protected $table ='equipos';
     protected $fillable = ['pais', 'evento_deportivo_id', 'medalla_id'];
 
-<<<<<<< HEAD
-    // Define el nombre de la tabla si es necesario 
-    protected $table = 'equipos';
-
-    protected $fillable = [
-        'pais',
-        'evento_deportivo',
-        'medalla',
-    ];
-=======
       /** Relación con el modelo EventoDeportivo (Este método indica que el modelo actual
      * tiene una clave foránea que apunta a otro modelo,se utiliza para
      * establecer que el equipo está asociado a un evento deportivo y a una medalla específicos.)
@@ -92,5 +82,4 @@ class equipo extends Model
         }
         return false;
     }
->>>>>>> a898530e1214a575a74e276c26d474bcb9128567
 }

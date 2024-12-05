@@ -19,7 +19,7 @@ class Deportista extends Model
     /**
      * Obtener un deportista por su nombre
      */
-    public static function obtenerPorId($nombre)
+    public static function obtenerPorNombre($nombre)
     {
         return self::find($nombre);
     }

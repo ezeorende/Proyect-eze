@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use app\Models\Deportista;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,4 +18,8 @@ Route::get('/', function () {
 });
 Route::get('/paises', function () {
     return view('paises');
+});
+Route::get('/models', function () {
+    $dep= new deportista;
+    return $dep;
 });

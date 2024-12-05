@@ -17,16 +17,8 @@ class Medalla extends Model
         return $this->belongsTo(EventoDeportivo::class, 'id_evento');
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-     //Define que campos de la tabla pueden ser editados 
-    protected $fillable = [
-        'evento_id',
-        'tipo',
-    ];
-=======
->>>>>>> fccdec53222ba78b5ca5d28a0dd02285a44920d6
+
+     
       /**
      * Obtener todas las medallas
      */
@@ -34,10 +26,7 @@ class Medalla extends Model
     {
         return self::all();
     }
-<<<<<<< HEAD
-=======
->>>>>>> a898530e1214a575a74e276c26d474bcb9128567
->>>>>>> fccdec53222ba78b5ca5d28a0dd02285a44920d6
+
 
     /**
      * Obtener una medalla por su ID
