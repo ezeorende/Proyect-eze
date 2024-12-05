@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Equipo;
 use App\Models\Medalla;
 use Illuminate\Http\Request;
+use App\Models\Pais;
 
 class EquipoController extends Controller
 {
@@ -29,7 +30,24 @@ class EquipoController extends Controller
 
         $validated = $request->toArray(); 
         
+        
+        //Crea una medalla nueva para el equipo que la gano, basandose en el tipo de la medalla (oro - plata - bronce)
         $medalla = Medalla::crearMedalla($validated['evento_deportivo_id'], $validated['tipo_medalla']);
+       
+
+        //Actualiza en la tabla Pais las medallas que este tiene, dependiendo el tipo de la mdedalla 
+        $pais = Pais::find($validated['pais_id']);
+        if ($validated['tipo_medalla'] === 'oro') {
+            $pais->medallas_oro += 1;
+        } elseif ($validated['tipo_medalla'] === 'plata') {
+            $pais->medallas_plata += 1;
+        } elseif ($validated['tipo_medalla'] === 'bronce') {
+            $pais->medallas_bronce += 1;
+        }
+        $pais->save();
+
+        //Actualiza el total de las medallas con las cuales cuenta el Pais
+        Pais::actualizarTotalMedallas($validated['pais_id']);
 
 
         // Crear el registro en la base de datos
@@ -39,11 +57,8 @@ class EquipoController extends Controller
             'medalla' => $medalla->id,
         ]);
 
-
-        
         $equipo->deportistas()->sync($validated['deportistas']);
 
-     
         // Retornar una respuesta JSON
         return response()->json([
             'message' => 'Registro creado exitosamente',
@@ -51,11 +66,15 @@ class EquipoController extends Controller
         ], 201);
     }
 
-   
+    
+  
+
+
     public function show(Request $request, string $id) {
         $equipo = Equipo::findOrFail($id);
         return response()->json($equipo);
     }
+
 
 
     public function update(Request $request, $id)
