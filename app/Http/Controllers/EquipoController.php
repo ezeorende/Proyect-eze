@@ -5,6 +5,8 @@ use App\Models\Equipo;
 use App\Models\Medalla;
 use Illuminate\Http\Request;
 use App\Models\Pais;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class EquipoController extends Controller
 {
@@ -18,18 +20,33 @@ class EquipoController extends Controller
     public function store(Request $request)
     {
         // Validar los datos de entrada
-        /*
-        $validated = $request->validate([
+        
+        $validator = Validator::make($request->all(), [
             'pais_id' => 'required|integer|exists:pais,id|min:0',
             'evento_deportivo_id' => 'required|exists:evento_deportivos,id|integer|min:0',
-            'tipo_medalla' => 'required|integer|min:0|in:oro,plata,bronce',
-            'deportistas' => 'required|array',
-            'deportistas.*' => 'required|integer|exists:deportistas,id',
+            'tipo_medalla' =>[
+                'required',
+                'in:oro,plata,bronce',
+                function ($attribute, $value, $fail) use ($request) {
+                    $exists = DB::table('medallas') // Verificar la existencia en la base de datos
+                        ->where('evento_id', $request->evento_id)
+                        ->where('tipo', $value)
+                        ->exists();
+    
+                    if ($exists) {
+                        $fail("El tipo de medalla $value ya ha sido asignado para este evento.");
+                    }
+                },
+            ],
         ]);
-        */
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        
+
 
         $validated = $request->toArray(); 
-        
         
         //Crea una medalla nueva para el equipo que la gano, basandose en el tipo de la medalla (oro - plata - bronce)
         $medalla = Medalla::crearMedalla($validated['evento_deportivo_id'], $validated['tipo_medalla']);

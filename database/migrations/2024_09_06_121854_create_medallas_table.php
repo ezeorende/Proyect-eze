@@ -19,6 +19,9 @@ return new class extends Migration
             $table->enum('tipo', ['oro', 'plata', 'bronce']);
             $table->timestamps();
 
+            // Restricción única para evitar la entrada duplicada de medallas por eventos deportivos.
+            $table->unique(['evento_id', 'tipo'], 'evento_medalla_unique');
+
         });
     }
 
